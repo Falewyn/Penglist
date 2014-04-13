@@ -1,7 +1,7 @@
 .row
 	.col-md-6.col-md-offset-3
 		%h3= titre
-		- if current_user && menu
+		- if user_signed_in ?&& menu
 			%p.menus
 				- if !my
 					= link_to mysongs_path, :class => "btn btn-success" do
@@ -29,28 +29,28 @@
 			.btn-group
 				=link_to song, :class => "btn btn-primary" do
 					%span.glyphicon.glyphicon-music
+				- if user_signed_in?
+					%button.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"}
+						%span.glyphicon.glyphcdicon-share-alt
+						Playlist
+						%span.caret
+					%ul.dropdown-menu{:role => "menu", :id => dom_id(song)}
+						%li 
+							- @notin = []; @in = [];
+							- @myplaylists.each do |play|
+								- if !play.songs.include?(song)
+									- @notin.push(play);
+								- else
+									- @in.push(play)
 
-				%button.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown"}
-					%span.glyphicon.glyphicon-share-alt
-					Playlist
-					%span.caret
-				%ul.dropdown-menu{:role => "menu", :id => dom_id(song)}
-					%li 
-						- @notin = []; @in = [];
-						- @myplaylists.each do |play|
-							- if !play.songs.include?(song)
-								- @notin.push(play);
-							- else
-								- @in.push(play)
-
-						- @notin.each do |play|
-							%a.add{:id => dom_id(play)}= play.name
-						- if @notin.any? && @in.any?
-							.divider
-						- @in.each do |play|
-							%a.remove{:id => dom_id(play)}
-								%span.glyphicon.glyphicon-ok
-								= play.name
+							- @notin.each do |play|
+								%a.add{:id => dom_id(play)}= play.name
+							- if @notin.any? && @in.any?
+								.divider
+							- @in.each do |play|
+								%a.remove{:id => dom_id(play)}
+									%span.glyphicon.glyphicon-ok
+									= play.name
 			%h4=song.name
 			%h5=song.artist
 

@@ -1,7 +1,7 @@
 .row
 	.col-md-6.col-md-offset-3
 		%h3= titre
-		- if current_user && menu
+		- if user_signed_in? && menu
 			%p.menus
 				- if !my
 					= link_to myplaylists_path, :class => "btn btn-success" do
