@@ -1,0 +1,12 @@
+.row
+	.col-md-6.col-md-offset-3
+		%h1= @playlist.name
+		%h3 #{@creator} - #{time_ago_in_words(@playlist.created_at)} ago
+
+		- @list = "";
+		- @songs.each do |song|
+			- @list += song.youtube+ ","
+
+		%iframe{:allowscriptaccess => "always", :allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "http://www.youtube.com/embed/?playlist="+@list[0..-2]+"&version=3&autoplay=1", :title => @playlist.name, :width => "640"}     
+
+=render :partial => 'songs/songlist', :locals => { :titre => "Songs from "+@playlist.name, :my => false, :menu => false}

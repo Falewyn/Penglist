@@ -38,6 +38,7 @@ main {
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
+  padding-top: 20px;
   }
 section {
   @extend .row;
@@ -56,10 +57,17 @@ section {
   @extend .well;
   @extend .well-lg;
   padding-bottom: 40px;
+  overflow: hidden;
+  width: 100%;
 }
 .authform .right {
   float: right !important;
 }
+
+.authform .right:after {
+  clear:both;
+}
+
 .authform .button {
   @extend .btn;
   @extend .btn-primary;
@@ -78,4 +86,13 @@ section {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-xs;
+}
+
+.controls input, .controls textarea{
+  @extend .form-control;
+  resize: none;
+}
+
+.center{
+  text-align: center;
 }

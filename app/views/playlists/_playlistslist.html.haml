@@ -1,0 +1,32 @@
+.row
+	.col-md-6.col-md-offset-3
+		%h3= titre
+		- if current_user && menu
+			%p.menus
+				- if !my
+					= link_to myplaylists_path, :class => "btn btn-success" do
+						%span.glyphicon.glyphicon-th-list
+						My Playlists
+				-else 
+					= link_to playlists_path, :class => "btn btn-success" do
+						%span.glyphicon.glyphicon-th-list
+						All Playlists
+				= link_to new_playlist_path, :class => "btn btn-primary" do
+					%span.glyphicon.glyphicon-plus
+					Create a new PlayList
+		
+- @playlists.each do |play|	
+	.row.playlist
+		.col-md-6.col-md-offset-3
+			.btn-group-vertical
+				=link_to play, :class => "btn btn-primary" do
+					%span.glyphicon.glyphicon-music
+				- if user_signed_in? && current_user.id == play.user_id
+					=link_to edit_playlist_path(play), :class => "btn btn-warning" do
+						%span.glyphicon.glyphicon-wrench
+					%button.btn.btn-danger{:id => dom_id(play)}
+						%span.glyphicon.glyphicon-trash
+			%h4=play.name
+			%p=play.description
+			%i #{play.songs.count} #{"Song".pluralize(play.songs.count)} - Created by #{User.find(play.user_id).name}
+				

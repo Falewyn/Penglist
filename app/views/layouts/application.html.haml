@@ -5,6 +5,7 @@
     %title= content_for?(:title) ? yield(:title) : 'Peng List'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Peng List'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Short+Stack'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
@@ -13,3 +14,7 @@
     %main{:role => "main"}
       = render 'layouts/messages'
       = yield
+    %footer
+      %span.glyphicon.glyphicon-heart
+      %span.glyphicon.glyphicon-music
+      %p All Rights Reserved - Copyright &copy 2014 PengList

@@ -1,0 +1,7 @@
+.authform
+	= simple_form_for @song do |f|
+		%h3 #{action} Song
+		= f.input :name, :autofocus => true, :required => true
+		= f.input :artist, :required => true
+		= f.input :youtube, :required => true, :pattern => ".{11}", :label => "YouTube ID", :hint => "http://youtube.com/watch?v=___________"
+		= f.button :submit, action+' Song', :class => 'btn-primary right'

@@ -1,0 +1,8 @@
+.row
+	.col-md-6.col-md-offset-3
+		%h1 #{@song.name} - #{@song.artist}
+		%h3 #{@creator} - #{time_ago_in_words(@song.created_at)} ago
+
+		%iframe{:allowscriptaccess => "always", :allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "http://www.youtube.com/embed/"+@song.youtube, :title => "YouTube video player", :width => "640"}           
+
+=render :partial => 'playlists/playlistslist', :locals => { :titre => "Belong in these PlayList", :my => false, :menu => false}
